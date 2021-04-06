@@ -685,6 +685,17 @@ def fill_queue():
 	global curX, curY, curX2, curY2
 
 	while True:
+		#check if program is not 6, then close connection if it is open. 
+		# sleep for threading to let mainloop run without lag
+		if checkGPIO() != 6 and eye_coordinate_socket.get_socket_connected_status():
+			eye_coordinate_socket.set_socket_connected_status(False)
+			try:
+				eye_coordinate_socket.close_socket()
+			except Exception:
+				pass
+			time.sleep(5)
+
+
 		if checkGPIO() == 6: 
 			#hacked for test of eye tracking
 			# AUTOBLINK = False #disables blinking
@@ -714,14 +725,9 @@ def fill_queue():
 				#curY2 = 30
 				eye_coordinate_socket.set_socket_connected_status(False)		
 				print(f'failed to get datafrom socket and put to queue: {e}')
+		else:
+			time.sleep(5)
 
-		if checkGPIO() != 6 and eye_coordinate_socket.get_socket_connected_status():
-			eye_coordinate_socket.set_socket_connected_status(False)
-			try:
-				eye_coordinate_socket.close_socket()
-			except Exception:
-				pass
-			time.sleep(2)
 	
 
 
