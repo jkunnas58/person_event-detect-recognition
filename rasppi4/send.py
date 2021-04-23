@@ -1,26 +1,30 @@
 import socket
 import numpy as np
 import time
-from coordinate_converter import ConvertCoordinates
-
-HOST = '192.168.191.125'  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 
 class SendData():
+    """
+    Send data class. This class sets up a sending server waiting for clients to
+    connect.
+
+    class has a class method that sets up the server in setup_server_sending()
+
+    The function send_data(data_to_send) sends the data as string in utf-8
+    encoding 
+
+    """
 
     def __init__(self) -> None:
-        self.__host = '192.168.191.125'
-        self.__port = 65432
-        # self.__eyeX = 30
-        # self.__eyeY = 30
+        self.__host = '192.168.191.125' # loopback interface address (localhost)
+        self.__port = 65432 # Port to listen on (non-privileged ports are > 1023)
         self.__socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.__connection = None
         self.__address = None
 
     def setup_server_sending(self):
         print("Server Started waiting for client to connect ")
-        self.__socket.bind((HOST, PORT))
+        self.__socket.bind((self.__host, self.__port))
         self.__socket.listen(5)
         self.__connection, self.__address = self.__socket.accept()
         print('Connected to', self.__address)
@@ -58,20 +62,9 @@ class RandomData():
 
         return x1, y1
 
-
-def test():
-    eyex = 20.46
-    eyey = 40.23
-    bytes_data = bytes(f'{eyex},{eyey}', 'utf-8')
-    print(bytes_data)
-    print(len(bytes_data))
-
-
 def main():
-
     random_data = RandomData()
-    send_data = SendData()
-    send_data.set_fake_data(True)
+    send_data = SendData()    
     send_data.setup_server_sending()
 
     while True:
@@ -84,4 +77,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    # test()
+

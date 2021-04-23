@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 # Code originates from 
-# https://learn.adafruit.com/animated-snake-eyes-bonnet-for-raspberry-pi/software-installation
+# https://learn.adafruit.com/animated-snake-eyes-bonnet-for-raspberry-pi/ ...
+#  ... software-installation
 # https://github.com/adafruit/Pi_Eyes/
 # Expanded to be controled by joystick and switch
 # Start with python eyes.py --radius 200 or any other number to change eye size
@@ -499,37 +500,6 @@ def frame(p):
 		except Exception as e:
 			print(f'assigning queue items failed: {e}')
 
-		
-	# 	try:
-	# 		if not eye_coordinate_socket.get_socket_connected():
-	# 			eye_coordinate_socket.connect_to_server()
-	# 	except:
-	# 		# print('cannot connect to server')
-	# 		#troubleshooting will look down and to the left
-	# 		eye_coordinate_socket.set_socket_connected(False)
-	# 		curX = 30
-	# 		curY = -30
-	# 		curX2 = -30
-	# 		curY2 = 30			
-	# 	try:
-	# 		curX, curY, curX2, curY2 = eye_coordinate_socket.get_eye_coordinates_float()
-
-	# 	except:
-	# 		#        (30,-30) #left to right looking at the eyes
-	# 		# 	     (-30,30) #down to up
-	# 		#troubleshooting locked right up
-	# 		curX = -30
-	# 		curY = 30
-	# 		curX2 = 30
-	# 		curY2 = -30
-	# 		eye_coordinate_socket.set_socket_connected(False)		
-	 
-	# if checkGPIO() != 6:
-	# 	eye_coordinate_socket.set_socket_connected(False)
-	# 	try:
-	# 		eye_coordinate_socket.close_socket()
-	# 	except Exception:
-	# 		pass
 
 	
 	if TRACKING:
@@ -685,49 +655,30 @@ def fill_queue():
 	global curX, curY, curX2, curY2
 
 	while True:
-		#check if program is not 6, then close connection if it is open. 
-		# sleep for threading to let mainloop run without lag
-		if checkGPIO() != 6 and eye_coordinate_socket.get_socket_connected_status():
-			eye_coordinate_socket.set_socket_connected_status(False)
-			try:
-				eye_coordinate_socket.close_socket()
-			except Exception:
-				pass
-			time.sleep(5)
-
-
 		if checkGPIO() == 6: 
-			#hacked for test of eye tracking
+			#modified for test of eye tracking
 			# AUTOBLINK = False #disables blinking
 			try:
 				if not eye_coordinate_socket.get_socket_connected_status():
 					eye_coordinate_socket.connect_to_server()
-			except Exception:
-				# print('cannot connect to server')
-				#troubleshooting will look down and to the left
+			except Exception:				
 				eye_coordinate_socket.set_socket_connected_status(False)
-				#curX = 30
-				#curY = -30
-				#curX2 = 30
-				#curY2 = -30
 
 			try:
 				ext_curX, ext_curY, ext_curX2, ext_curY2 = eye_coordinate_socket.get_eye_coordinates_float()
 				dnn_queue.put((ext_curX, ext_curY, ext_curX2, ext_curY2))
 
 			except Exception as e:
-				#        (30,-30) #left to right looking at the eyes
-				# 	     (-30,30) #down to up
-				#troubleshooting locked right up
-				#curX = -30
-				#curY = 30
-				#curX2 = -30
-				#curY2 = 30
 				eye_coordinate_socket.set_socket_connected_status(False)		
 				print(f'failed to get datafrom socket and put to queue: {e}')
-		else:
-			time.sleep(5)
 
+		if checkGPIO() != 6 and eye_coordinate_socket.get_socket_connected_status():
+			eye_coordinate_socket.set_socket_connected_status(False)
+			try:
+				eye_coordinate_socket.close_socket()
+			except Exception:
+				pass
+			time.sleep(2)
 	
 
 

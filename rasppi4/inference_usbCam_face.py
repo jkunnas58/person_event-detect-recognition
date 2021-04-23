@@ -17,6 +17,7 @@ from utils import label_map_util
 from utils import visualization_utils_color as vis_util
 from send import SendData
 from coordinate_converter import ConvertCoordinates
+import copy
 
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
@@ -30,7 +31,10 @@ PATH_TO_LABELS = r"C:\dev\tensorflow\workspace\tensorflow-face-detection-master\
 NUM_CLASSES = 2
 
 label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
-categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
+categories = label_map_util.convert_label_map_to_categories(
+                                        label_map,
+                                        max_num_classes=NUM_CLASSES,
+                                        use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
 
@@ -206,12 +210,12 @@ if __name__ == "__main__":
     coordinate_converter = ConvertCoordinates()
     coordinate_converter.set_camera_resolution((640,480)) #camera resolution
     coordinate_converter.set_eye_center_offset_from_screen(-10) # distance to fictive eye center behind monitor
-    coordinate_converter.set_mode('2D')
-    coordinate_converter.set_xyz(0,0,1000) #default point to look at top left looking at head
-
+    coordinate_converter.set_mode('3D')
+    # coordinate_converter.set_xyz(50,50,1000) #default point to look at top left looking at head
+    depth_previous = 0.8
 
     while True:
-        # Wait for a coherent pair of frames: depth and color
+        # Wait for a coherent pair of frames: depth and color        
         frames = pipeline.wait_for_frames()
         depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
@@ -289,7 +293,9 @@ if __name__ == "__main__":
             depth_location = np.mean([depth_location,depth_location_right,depth_location_left])
             # Write some Text
             if depth_location < 0.01:
-                depth_location = 0.8
+                depth_location = depth_previous
+
+            depth_previous = copy.deepcopy(depth_location)
 
             font                   = cv2.FONT_HERSHEY_SIMPLEX
             bottomLeftCornerOfText = (box_int_list[1],box_int_list[2])
@@ -316,6 +322,15 @@ if __name__ == "__main__":
                 depth_location*1000
             )      
 
+            try:
+                str_data_to_send = coordinate_converter.get_eye_coordinates()
+                # print(str_data_to_send)
+                send_data_to_socket.send_data(str_data_to_send)
+                time.sleep(0.05)
+            except Exception:
+                # str_data_to_send = coordinate_converter.get_eye_coordinates()
+                # send_data_to_socket.send_data(str_data_to_send)
+                time.sleep(0.05)
 
             # print(circle_coordinates[0], circle_coordinates[1])
             # print(f'depth to focus point {depth_location}')         
@@ -325,14 +340,6 @@ if __name__ == "__main__":
             # print('no output')
             pass
         
-        try:
-            str_data_to_send = coordinate_converter.get_eye_coordinates()
-            send_data_to_socket.send_data(str_data_to_send)
-            time.sleep(0.5)
-        except Exception:
-            # str_data_to_send = coordinate_converter.get_eye_coordinates()
-            # send_data_to_socket.send_data(str_data_to_send)
-            time.sleep(1)
 
         if windowNotSet is True:
             cv2.namedWindow("tensorflow based (%d, %d)" % (w, h), cv2.WINDOW_NORMAL)

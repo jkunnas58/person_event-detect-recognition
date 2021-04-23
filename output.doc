@@ -1,0 +1,71 @@
+Folder PATH listing for volume OS
+Volume serial number is 4EB6-7851
+C:.
+|   .gitignore
+|   output.doc
+|   README.md
+|   
++---custom_from_scratch
+|       example_from_github_tf_cloud.py
+|       training.py
+|       transfer_learning.ipynb
+|       transfer_learning.py
+|       
++---image_capture_webcam
+|   |   capture_webcam.py
+|   |   
+|   \---images
+|       \---collectedimages
+|           +---face
+|           |       face.4035e99b-59d1-11eb-99f8-5c879c2c30c0.jpg
+|           |       face.4035e99b-59d1-11eb-99f8-5c879c2c30c0.xml
+|           |       face.4170fccf-59d1-11eb-8605-5c879c2c30c0.jpg
+|           |       face.4170fccf-59d1-11eb-8605-5c879c2c30c0.xml
+|           |       face.42a3ff65-59d1-11eb-bfc7-5c879c2c30c0.jpg
+|           |       face.42a3ff65-59d1-11eb-bfc7-5c879c2c30c0.xml
+|           |       face.43d9308c-59d1-11eb-9e2e-5c879c2c30c0.jpg
+|           |       face.43d9308c-59d1-11eb-9e2e-5c879c2c30c0.xml
+|           |       face.450e8da2-59d1-11eb-9a68-5c879c2c30c0.jpg
+|           |       face.450e8da2-59d1-11eb-9a68-5c879c2c30c0.xml
+|           |       face.4643daf3-59d1-11eb-8eac-5c879c2c30c0.jpg
+|           |       face.4643daf3-59d1-11eb-8eac-5c879c2c30c0.xml
+|           |       face.477943fc-59d1-11eb-86cc-5c879c2c30c0.jpg
+|           |       face.477943fc-59d1-11eb-86cc-5c879c2c30c0.xml
+|           |       face.48ae8aff-59d1-11eb-9730-5c879c2c30c0.jpg
+|           |       face.48ae8aff-59d1-11eb-9730-5c879c2c30c0.xml
+|           |       face.49e44a34-59d1-11eb-a9fd-5c879c2c30c0.jpg
+|           |       face.49e44a34-59d1-11eb-a9fd-5c879c2c30c0.xml
+|           |       face.4b19a1df-59d1-11eb-8ca2-5c879c2c30c0.jpg
+|           |       face.4b19a1df-59d1-11eb-8ca2-5c879c2c30c0.xml
+|           |       
+|           \---hand
+|                   hand.50bd0153-59d1-11eb-993a-5c879c2c30c0.jpg
+|                   hand.50bd0153-59d1-11eb-993a-5c879c2c30c0.xml
+|                   hand.51faacb3-59d1-11eb-af1b-5c879c2c30c0.jpg
+|                   hand.51faacb3-59d1-11eb-af1b-5c879c2c30c0.xml
+|                   hand.532fc252-59d1-11eb-a64d-5c879c2c30c0.jpg
+|                   hand.532fc252-59d1-11eb-a64d-5c879c2c30c0.xml
+|                   hand.5464dc46-59d1-11eb-9b26-5c879c2c30c0.jpg
+|                   hand.5464dc46-59d1-11eb-9b26-5c879c2c30c0.xml
+|                   hand.559a7d79-59d1-11eb-8433-5c879c2c30c0.jpg
+|                   hand.559a7d79-59d1-11eb-8433-5c879c2c30c0.xml
+|                   hand.56cfcb14-59d1-11eb-9508-5c879c2c30c0.jpg
+|                   hand.56cfcb14-59d1-11eb-9508-5c879c2c30c0.xml
+|                   hand.58051021-59d1-11eb-92be-5c879c2c30c0.jpg
+|                   hand.58051021-59d1-11eb-92be-5c879c2c30c0.xml
+|                   hand.593a34e6-59d1-11eb-8ecc-5c879c2c30c0.jpg
+|                   hand.593a34e6-59d1-11eb-8ecc-5c879c2c30c0.xml
+|                   hand.5a6f9dce-59d1-11eb-a30b-5c879c2c30c0.jpg
+|                   hand.5a6f9dce-59d1-11eb-a30b-5c879c2c30c0.xml
+|                   hand.5ba4fc95-59d1-11eb-8893-5c879c2c30c0.jpg
+|                   hand.5ba4fc95-59d1-11eb-8893-5c879c2c30c0.xml
+|                   
++---rasppi3
+|       eyes.py
+|       obj_detection_data_socket.py
+|       
+\---rasppi4
+        coordinate_converter.py
+        inference_usbCam_face.py
+        send.py
+        

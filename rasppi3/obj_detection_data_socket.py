@@ -2,7 +2,7 @@ import socket
 
 class RecieveData():
     """ 
-    Class that starts a socket connection and recives eye coordinates
+    Class that starts a socket connection and recieves eye coordinates
     for eye simulator to use
     
     """
@@ -31,10 +31,7 @@ class RecieveData():
     def get_data_from_connection(self):
             data = self.__socket.recv(1024).decode('utf-8')
             self.process_data_from_server(data)
-            # print(f"EyeX: {self.__eyeX}")
-            # print(f"EyeY: {self.__eyeY}")
-            # time.sleep(1)
-            # s.close()q
+
 
     def get_eye_coordinates_str(self):
 	    self.get_data_from_connection()
@@ -50,17 +47,23 @@ class RecieveData():
                 float(self.__eyeXL),\
                 float(self.__eyeYL)
 
+    def close_socket(self):
+        self.__socket.shutdown()
+        self.__socket.close()
+
     def get_socket_connected_status(self):
         return self.__connected_to_socket
 
     def set_socket_connected_status(self, bool):
         self.__connected_to_socket = bool
 
-    def close_socket(self):
-        self.__socket.shutdown()
-        self.__socket.close()
+    def set_host_ip(self, host_ip):
+        # Set host ip as string: example: '192.168.2.1'
+        self.__host = host_ip
 
-
+    def set_host_port(self, host_port):
+        # Set host port as integer: example: 65432
+        self.__port = host_port
 
 def main():
     eye_coordinates = RecieveData()
