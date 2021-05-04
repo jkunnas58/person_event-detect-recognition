@@ -22,11 +22,11 @@ import copy
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
 PATH_TO_CKPT = './model/frozen_inference_graph_face.pb'
-PATH_TO_CKPT = r"C:\dev\tensorflow\workspace\tensorflow-face-detection-master\model\frozen_inference_graph_face.pb"
+# PATH_TO_CKPT = r"C:\dev\tensorflow\workspace\tensorflow-face-detection-master\model\frozen_inference_graph_face.pb"
 
 # List of the strings that is used to add correct label for each box.
 PATH_TO_LABELS = './protos/face_label_map.pbtxt'
-PATH_TO_LABELS = r"C:\dev\tensorflow\workspace\tensorflow-face-detection-master\protos\face_label_map.pbtxt"
+# PATH_TO_LABELS = r"C:\dev\tensorflow\workspace\tensorflow-face-detection-master\protos\face_label_map.pbtxt"
 
 NUM_CLASSES = 2
 

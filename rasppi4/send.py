@@ -16,7 +16,7 @@ class SendData():
     """
 
     def __init__(self) -> None:
-        self.__host = '192.168.191.125' # loopback interface address (localhost)
+        self.__host = '192.168.191.119' # loopback interface address (localhost)
         self.__port = 65432 # Port to listen on (non-privileged ports are > 1023)
         self.__socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.__connection = None

@@ -37,10 +37,10 @@ class ConvertCoordinates():
         self.__eyeXL = None  
         self.__eyeYL = None
         self.__mode = ''
-        self.__camera_to_between_eyes_offset_x = 180 
-        self.__camera_to_between_eyes_offset_y = -100
-        self.__camera_to_between_eyes_offset_z = -70 
-        self.__eye_offset_R_x = 31  + self.__camera_to_between_eyes_offset_x 
+        self.__camera_to_between_eyes_offset_x = 0
+        self.__camera_to_between_eyes_offset_y = 120
+        self.__camera_to_between_eyes_offset_z = 0 
+        self.__eye_offset_R_x = 31  + self.__cgitamera_to_between_eyes_offset_x 
         self.__eye_offset_L_x = -31 + self.__camera_to_between_eyes_offset_x 
         self.__eye_offset_R_y = self.__camera_to_between_eyes_offset_y 
         self.__eye_offset_L_y = self.__camera_to_between_eyes_offset_y
