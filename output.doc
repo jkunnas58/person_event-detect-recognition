@@ -1,13 +1,26 @@
-File Tree
 |   .gitignore
 |   README.md
-|   
+|
 +---rasppi3
 |       eyes.py
 |       obj_detection_data_socket.py
 |       
 \---rasppi4
-        coordinate_converter.py
-        inference_usbCam_face.py
-        send.py
-        
+    |   coordinate_converter.py
+    |   inference_usbCam_face.py
+    |   send.py
+    |   
+    +---model
+    |       frozen_inference_graph_face.pb
+    |       
+    +---protos
+    |   |   face_label_map.pbtxt
+    |   |   string_int_label_map_pb2.py
+    |
+    |           
+    +---utils
+    |   |   label_map_util.py
+    |   |   visualization_utils_color.py
+    
+    
+            
